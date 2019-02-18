@@ -30,6 +30,7 @@ namespace BenchmarkXamarin
 
         public void Start()
         {
+            Log($"begin work, {WorkingCount} iterations, {WarmupCount} warmup");
             foreach (MethodInfo benchmark in _benchmarks)
                 Perform(benchmark);
             Log("Completed");
