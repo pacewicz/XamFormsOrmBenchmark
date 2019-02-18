@@ -32,6 +32,7 @@ namespace BenchmarkXamarin
         {
             foreach (MethodInfo benchmark in _benchmarks)
                 Perform(benchmark);
+            Log("Completed");
         }
 
         private void Perform(MethodInfo benchmark)
