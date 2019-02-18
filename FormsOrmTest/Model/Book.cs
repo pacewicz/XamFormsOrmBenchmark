@@ -15,7 +15,7 @@ namespace FormsOrmTest.Model
         [PrimaryKey, AutoIncrement, Column("_id")]
         public int Id { get; set; }
 
-        [Column("library")] public Library Library { get; set; }
+//        [Column("library")] public Library Library { get; set; }
 
         public Book()
         {
@@ -30,9 +30,9 @@ namespace FormsOrmTest.Model
             PagesCount = pagesCount;
         }
 
-        public Book(string author, string title, int pagesCount, Library library) : this(author, title, pagesCount)
-        {
-            Library = library;
-        }
+//        public Book(string author, string title, int pagesCount, Library library) : this(author, title, pagesCount)
+//        {
+//            Library = library;
+//        }
     }
 }
