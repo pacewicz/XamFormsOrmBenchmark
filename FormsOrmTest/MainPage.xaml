@@ -3,6 +3,6 @@
     <StackLayout>
         <!-- Place new controls here -->
         <Label x:Name="ResultLabel" Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
-        <Button Text="Benchmark" Clicked="Handle_Clicked" />
+        <Button Text="Benchmark" Clicked="Handle_Clicked2" />
     </StackLayout>
 </ContentPage>

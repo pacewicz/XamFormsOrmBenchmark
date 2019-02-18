@@ -95,6 +95,10 @@
       <Project>{71783372-3887-45E0-BC82-4BCACBB67F42}</Project>
       <Name>FormsOrmTest</Name>
     </ProjectReference>
+      <ProjectReference Include="..\Netstandard2\Netstandard2.csproj">
+          <Project>{5D9F9676-A799-46C5-9D8B-A841C4172896}</Project>
+          <Name>Netstandard2</Name>
+      </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

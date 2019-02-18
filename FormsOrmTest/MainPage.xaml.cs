@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using BenchmarkXamarin;
 using FormsOrmTest.Model;
 using SQLite;
 using Xamarin.Forms;
@@ -17,6 +20,26 @@ namespace FormsOrmTest
         {
             InitializeComponent();
 
+        }
+
+        void Handle_Clicked2(object sender, System.EventArgs e)
+        {
+            var thread = new Thread(RunThread);
+            thread.Start();
+        }
+
+        private void RunThread()
+        {
+            BenchmarkManager.Current.Register(typeof(BenchmarkManager).Assembly);
+            var status = "wait";
+
+            BenchmarkManager.Current.Log += text =>
+            {
+                status += "\n" + text;
+                Device.BeginInvokeOnMainThread(() => ResultLabel.Text = status);
+
+            };
+            BenchmarkManager.Current.Start();
         }
 
         async void Handle_Clicked(object sender, System.EventArgs e)
