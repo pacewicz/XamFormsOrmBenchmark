@@ -4,5 +4,7 @@
         <!-- Place new controls here -->
         <Label x:Name="ResultLabel" Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
         <Button Text="Benchmark" Clicked="Handle_Clicked2" />
+        <Button Text="Benchmark_single" Clicked="Handle_Clicked" />
+        <Button Text="Benchmark_10" Clicked="Handle_Clicked10k" />
     </StackLayout>
 </ContentPage>

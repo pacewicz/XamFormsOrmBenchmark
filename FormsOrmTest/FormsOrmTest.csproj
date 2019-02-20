@@ -15,6 +15,7 @@
   </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Netstandard2\Netstandard2.csproj"/>
+        <ProjectReference Include="..\MobileAppPerformance\MobileAppPerformance.csproj" />
+        <ProjectReference Include="..\Netstandard2\Netstandard2.csproj" />
     </ItemGroup>
 </Project>

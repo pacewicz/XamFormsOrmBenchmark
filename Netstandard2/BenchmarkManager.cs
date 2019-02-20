@@ -8,8 +8,8 @@ namespace BenchmarkXamarin
 {
     public class BenchmarkManager
     {
-        private const int WarmupCount = 100;
-        private const int WorkingCount = 1000;
+        public const int WarmupCount = 5;
+        public const int WorkingCount = 20;
         private static readonly object[] Args = new object[0];
         private List<MethodInfo> _benchmarks = new List<MethodInfo>();
 
@@ -54,7 +54,7 @@ namespace BenchmarkXamarin
             for (int i = 0; i < WorkingCount; i++)
                 Execute(benchmark, obj, stopwatch);
 
-            double elapsed = Convert.ToDouble(stopwatch.ElapsedMilliseconds);
+            double elapsed = stopwatch.Elapsed.TotalMilliseconds;
             double average = elapsed / WorkingCount;
 
             Log(string.Format("{0}: {1}ms", benchmark.Name, average));

@@ -13,19 +13,19 @@ namespace BenchmarkXamarin.Benchmarks
             _randomObjectsGenerator = new RandomObjectsGenerator();
         }
 
-        [Benchmark]
+        //[Benchmark]
         public void InsertSync10()
         {
             InsertSync(10);
         }
         
-        [Benchmark]
+        //[Benchmark]
         public void InsertSync100()
         {
             InsertSync(100);
         }
 
-        [Benchmark]
+        //[Benchmark]
         public void InsertGenerated1000()
         {
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 

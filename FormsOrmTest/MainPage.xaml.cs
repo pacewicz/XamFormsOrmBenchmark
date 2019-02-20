@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using BenchmarkXamarin;
 using FormsOrmTest.Model;
+using MobileAppPerformance;
+using Netstandard2;
 using SQLite;
 using Xamarin.Forms;
 
@@ -30,7 +32,7 @@ namespace FormsOrmTest
 
         private void RunThread()
         {
-            BenchmarkManager.Current.Register(typeof(BenchmarkManager).Assembly);
+            BenchmarkManager.Current.Register(typeof(Tests).Assembly);
             var status = "wait";
 
             BenchmarkManager.Current.Log += text =>
@@ -44,60 +46,24 @@ namespace FormsOrmTest
 
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            const int passes = 5000;
+            var tests = new Tests();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            tests.Test1000();
+            stopWatch.Stop();
+            var elapsed = stopWatch.Elapsed.TotalMilliseconds;
+            Device.BeginInvokeOnMainThread(() => ResultLabel.Text = "1k elapsed " +elapsed);
+        }
 
-            var stopwatch = Stopwatch.StartNew();
-            var databasePath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.Personal), "db.sql");
-            if (File.Exists(databasePath))
-            {
-                File.Delete(databasePath);
-            }
-            var db = new SQLiteAsyncConnection(databasePath);
-//            await db.CreateTableAsync<Library>();
-            await db.CreateTableAsync<Book>();
-//            await db.CreateTableAsync<Person>();
-            for (int i = 0; i < passes; i++)
-            {
-                var book = new Book("Author", "Title", i+300);
-                await db.InsertAsync(book);
-            }
-
-            await db.CloseAsync();
-            stopwatch.Stop();
-            var elapsedMilliseconds = stopwatch.ElapsedMilliseconds;
-            Device.BeginInvokeOnMainThread(() => ResultLabel.Text = $"InsertAsync*{passes}: {elapsedMilliseconds} ms");
-
-          
-            if (File.Exists(databasePath))
-            {
-                File.Delete(databasePath);
-            }
-            stopwatch = Stopwatch.StartNew();
-            var sdb = new SQLiteConnection(databasePath);
-//            await db.CreateTableAsync<Library>();
-            sdb.CreateTable<Book>();
-//            await db.CreateTableAsync<Person>();
-            for (int i = 0; i < passes; i++)
-            {
-                var book = new Book("Author", "Title", i+300);
-                sdb.Insert(book);
-            }
-
-            sdb.Close();
-            stopwatch.Stop();
-            var elapsedMilliseconds2 = stopwatch.ElapsedMilliseconds;
-            Device.BeginInvokeOnMainThread(() => ResultLabel.Text += $"\nInsertSync*{passes}: {elapsedMilliseconds2} ms");
-
-            stopwatch = Stopwatch.StartNew();
-            sdb = new SQLiteConnection(databasePath);
-            var books = sdb.Get<Book>(b => true);
-
-            sdb.Close();
-            stopwatch.Stop();
-            var elapsedMilliseconds3 = stopwatch.ElapsedMilliseconds;
-            Device.BeginInvokeOnMainThread(() => ResultLabel.Text += $"\nGetSync*{passes}: {elapsedMilliseconds3} ms");
-
+        async void Handle_Clicked10k(object sender, System.EventArgs e)
+        {
+            var tests = new Tests();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            tests.Test10K();
+            stopWatch.Stop();
+            var elapsed = stopWatch.Elapsed.TotalMilliseconds;
+            Device.BeginInvokeOnMainThread(() => ResultLabel.Text = "10k elapsed " + elapsed     );
         }
     }
 }
